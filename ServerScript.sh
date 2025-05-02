@@ -120,3 +120,16 @@ while true; do
     handle_selection "$option"
     echo ""
 done
+
+<VirtualHost *:80>
+    ServerName example.com
+    DocumentRoot /var/www/lam
+
+    <Directory /var/www/lam>
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/lam_error.log
+    CustomLog ${APACHE_LOG_DIR}/lam_access.log combined
+</VirtualHost>
