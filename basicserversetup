@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Update and upgrade packages
+sudo apt update && sudo apt upgrade -y
+
+# Install Apache, PHP, and related modules
+sudo apt install apache2 php php-cgi libapache2-mod-php php-mbstring php-common php-pear -y
+
+# Install LDAP server and utilities
+sudo apt install slapd ldap-utils -y
+
+# Install LDAP Account Manager
+sudo apt -y install ldap-account-manager
+
+# Enable PHP module (if not already enabled) - consider removing if not needed
+# sudo a2enmod php
+
+# Define filename and content for lam.conf
+FILE="/etc/apache2/sites-available/lam.conf"
+CONTENT="<VirtualHost *:80>
+    ServerName 172.17.123.249
+    DocumentRoot /usr/share/ldap-account-manager
+
+    <Directory /usr/share/ldap-account-manager>
+        Options FollowSymLinks
+        AllowOverride None
+        Require all granted
+    </Directory>
+
+    ErrorLog \${APACHE_LOG_DIR}/lam_error.log
+    CustomLog \${APACHE_LOG_DIR}/lam_access.log combined
+</VirtualHost>"
+
+# Write the content to lam.conf
+echo "$CONTENT" | sudo tee "$FILE" > /dev/null
+
+# Enable the site
+sudo a2ensite lam.conf
+
+# Restart Apache
+sudo systemctl restart apache2
+
+# Enable Apache (likely redundant)
+# sudo systemctl enable apache2
+
+echo "lam.conf created and enabled.  Apache restarted."
