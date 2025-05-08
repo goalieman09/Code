@@ -44,3 +44,5 @@ sudo systemctl restart apache2
 # sudo systemctl enable apache2
 
 echo "lam.conf created and enabled.  Apache restarted."
+
+echo " MAKE SURE TO RUN THIS: sudo dpkg-reconfigure slapd"
