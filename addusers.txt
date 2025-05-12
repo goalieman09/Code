@@ -1,0 +1,47 @@
+# Base configuration for LDAP users
+
+dn: ou=Users,dc=core-auth,dc=zoo,dc=local
+objectClass: organizationalUnit
+ou: Users
+
+dn: uid=amina.yusuf,ou=Users,dc=core-auth,dc=zoo,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Amina Yusuf
+sn: Yusuf
+givenName: Amina
+uid: amina.yusuf
+uidNumber: 1001
+gidNumber: 1001
+homeDirectory: /home/amina.yusuf
+loginShell: /bin/bash
+userPassword: testing
+
+dn: uid=john.doe,ou=Users,dc=core-auth,dc=zoo,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: John Doe
+sn: Doe
+givenName: John
+uid: john.doe
+uidNumber: 1001
+gidNumber: 1001
+homeDirectory: /home/john.doe
+loginShell: /bin/bash
+userPassword: anotherpassword
+
+dn: uid=alice.smith,ou=Users,dc=core-auth,dc=zoo,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Alice Smith
+sn: Smith
+givenName: Alice
+uid: alice.smith
+uidNumber: 1002
+gidNumber: 1001
+homeDirectory: /home/alice.smith
+loginShell: /bin/bash
+userPassword: securepassword123
